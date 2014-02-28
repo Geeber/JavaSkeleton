@@ -1,0 +1,37 @@
+// Define wrapper task.
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.10'
+}
+
+// Apply plugins.
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'application'
+
+// Define the version and main class.
+version = '0.1.0'
+mainClassName = "Main"
+
+// Set up dependencies.
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'commons-io:commons-io:2.4'
+    testCompile 'org.mockito:mockito-all:1.9.5'
+    testCompile 'junit:junit:4.11'
+}
+
+// Define manifest properties.
+jar {
+    manifest {
+        attributes("Implementation-Vendor": "Kevin Litwack", "Implementation-Version": version)
+    }
+}
+
+// Limit JUnit tests to classes ending in 'Test'.
+test {
+    include '**/*Test.class'
+}
+
